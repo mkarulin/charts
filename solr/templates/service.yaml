@@ -11,9 +11,9 @@ metadata:
 spec:
   type: "{{ .Values.service.type }}"
   ports:
-  - port: {{ .Values.port }}
-    name: "solr-client"
+    - port: {{ .Values.port }}
+      name: "solr-client"
   selector:
-    app: "{{ template "solr.name" . }}"
-    release: "{{ .Release.Name }}"
-    component: "server"
+    app.kubernetes.io/instance: "{{ include "solr.name" . }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/component: "server"
