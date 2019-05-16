@@ -136,7 +136,7 @@ spec:
             - name: "SOLR_JAVA_MEM"
               value: "{{ .Values.javaMem }}"
             - name: "SOLR_HOME"
-              value: "/opt/solr/server/home"
+              value: "{{ .Values.home }}"
             - name: "SOLR_PORT"
               value: "{{ .Values.port }}"
             - name: "POD_HOSTNAME"
@@ -182,8 +182,8 @@ spec:
               path: /solr/admin/info/system
               port: {{ .Values.port }}
           volumeMounts:
-            - name: {{ template "solr.pvc-name" . }}
-              mountPath: /opt/solr/server/home
+            - name: {{ include "solr.pvc-name" . }}
+              mountPath: "{{ .Values.home }}"
 {{ if .Values.tls.enabled }}
             - name: "keystore-volume"
               mountPath: "/etc/ssl/keystores"

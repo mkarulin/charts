@@ -6,6 +6,9 @@ port: 8983
 # Number of solr instances to run
 replicaCount: 3
 
+# Location of solr home folder
+home: "/opt/solr/server/home"
+
 # Settings for solr java memory
 javaMem: "-Xms2g -Xmx3g"
 
