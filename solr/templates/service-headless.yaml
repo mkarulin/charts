@@ -9,9 +9,9 @@ metadata:
 spec:
   clusterIP: "None"
   ports:
-  - port: {{ .Values.port }}
-    name: "solr-headless"
+    - port: {{ .Values.port }}
+      name: "solr-headless"
   selector:
-    app: "{{ template "solr.name" . }}"
-    release: "{{ .Release.Name }}"
-    component: "server"
+    app.kubernetes.io/name: "{{ include "solr.name" . }}"
+    app.kubernetes.io/instance: "{{ .Release.Name }}"
+    app.kubernetes.io/component: "server"
