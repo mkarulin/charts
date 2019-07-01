@@ -1,9 +1,9 @@
 apiVersion: v1
 entries:
   haproxy-redis:
-  - created: 2019-07-01T15:43:41.690419+02:00
+  - created: 2019-07-01T15:49:30.039676+02:00
     description: A HAProxy based service for non-sentinel aware Redis clients.
-    digest: 18fa181f60d70d562dc749a7f02e1f6fb3f193682af8fec1e2a3ad2ff64d71a0
+    digest: be5548a580e6c6974854716d79c0c7e46e54cd6343cc2f51b4d9f20b9c062b2f
     icon: http://www.haproxy.org/img/HAProxyCommunityEdition_60px.png
     keywords:
     - haproxy
@@ -16,9 +16,9 @@ entries:
   solr:
   - apiVersion: v1
     appVersion: 7.6.0
-    created: 2019-07-01T15:43:41.693729+02:00
+    created: 2019-07-01T15:49:30.042372+02:00
     description: 'A helm chart to install Apache Solr: http://lucene.apache.org/solr/'
-    digest: d95ac37c8805c3719d5a467cab8355c229a63772a6f400134ec596cfa71dc72b
+    digest: 9adeb7fe0484e24a35d6383d3c4b961c1f471112cba571a6ba7ae6c06731082e
     home: http://lucene.apache.org/solr/
     keywords:
     - solr
@@ -33,7 +33,7 @@ entries:
     version: 1.1.2
   - apiVersion: v1
     appVersion: 7.6.0
-    created: 2019-07-01T15:43:41.692383+02:00
+    created: 2019-07-01T15:49:30.041037+02:00
     description: 'A helm chart to install Apache Solr: http://lucene.apache.org/solr/'
     digest: 4c83c7322bf2f31b86c3cc6369478bf4d2a71f09b082e168e044d5048e6d68b3
     home: http://lucene.apache.org/solr/
@@ -48,4 +48,4 @@ entries:
     urls:
     - solr-1.1.1.tgz
     version: 1.1.1
-generated: 2019-07-01T15:43:41.688501+02:00
+generated: 2019-07-01T15:49:30.038824+02:00
