@@ -195,6 +195,9 @@ spec:
             - name: {{ include "solr.pvc-name" . }}
               mountPath: "{{ .Values.home }}/solr.xml"
               subPath: "solr.xml"
+            - name: {{ include "solr.pvc-name" . }}
+              mountPath: "{{ .Values.home }}/data"
+              subPath: "data"
 {{ if .Values.tls.enabled }}
             - name: "keystore-volume"
               mountPath: "/etc/ssl/keystores"
