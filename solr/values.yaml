@@ -3,7 +3,10 @@
 # Which port should solr listen on
 port: 8983
 
-# Number of solr instances to run
+# Run in cloud mode ?
+solrCloud: true
+
+# Number of solr instances to run (Set this to 1 when not using solrCloud)
 replicaCount: 3
 
 # Location of solr home folder
@@ -59,6 +62,7 @@ volumeClaimTemplates:
   accessModes:
     - "ReadWriteOnce"
 
+
 # Configuration for solr TLS handling, see README.md for more instructions
 tls:
   enabled: false
@@ -79,6 +83,9 @@ tls:
 service:
   type: ClusterIP
   annotations: {}
+
+# postStart & presStop commands
+lifecycle: {}
 
 # Configuration for the solr prometheus exporter
 exporter:

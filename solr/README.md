@@ -28,6 +28,8 @@ The following table shows the configuration options for the Solr helm chart:
 | --------------------------------------------- | ------------------------------------- | --------------------------------------------------------------------- |
 | `port`                                        | The port that Solr will listen on | `8983`                                                                |
 | `replicaCount`                                | The number of replicas in the Solr statefulset | `3`                                                                   |
+| `solrCluoud`                                  | Run SOLR in cloud mode | `true`                                                                   |
+| `home`                                        | SOLR home folder location | `/opt/solr/server/home`                                                                   |
 | `javaMem`                                     | JVM memory settings to pass to Solr | `-Xms2g -Xmx3g`                                                       |
 | `resources`                                   | Resource limits and requests to set on the solr pods | `{}` |
 | `terminationGracePeriodSeconds`               | The termination grace period of the Solr pods | `180`|
@@ -46,6 +48,7 @@ The following table shows the configuration options for the Solr helm chart:
 | `volumeClaimTemplates.storageClassName`       | The name of the storage class for the Solr PVC | ``                                                             |
 | `volumeClaimTemplates.storageSize`            | The size of the PVC | `20Gi`                                                                |
 | `volumeClaimTemplates.accessModes`            | The access mode of the PVC| `[ "ReadWriteOnce" ]`                                                       |
+| `lifeCycle`                                   | postStart and preStop commands to execute, see https://kubernetes.io/docs/tasks/configure-pod-container/attach-handler-lifecycle-event/           | `{}`                                                               |
 | `tls.enabled`                                 | Whether to enable TLS, requires `tls.certSecret.name` to be set to a secret containing cert details, see README for details           | `false`                                                               |
 | `tls.wantClientAuth`                          | Whether Solr wants client authentication | `false`                                                               |
 | `tls.needClientAuth`                          | Whether Solr requires client authentication | `false`                                                               |

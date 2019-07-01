@@ -51,6 +51,7 @@ spec:
               - key: solr.xml
                 path: solr.xml
       initContainers:
+{{- if .Values.solrCloud }}
         - name: check-zk
           image: busybox:latest
           command:
@@ -71,6 +72,7 @@ spec:
               done;
               echo "Did NOT see a ZK leader after 240 secs!";
               exit 1;
+{{- end }}
         - name: "cp-solr-xml"
           image: busybox:latest
           command: ['sh', '-c', 'cp /tmp/solr.xml /tmp-config/solr.xml']
@@ -109,7 +111,9 @@ spec:
               done
               rm crt-*
 {{ end }}
+{{- if .Values.solrCloud }}
               /opt/solr/server/scripts/cloud-scripts/zkcli.sh -zkhost "{{ include "solr.zookeeper-name" . }}:2181" -cmd clusterprop -name urlScheme -val https
+{{- end }}
           volumeMounts:
             - name: "keystore-volume"
               mountPath: "/tmp/keystore"
@@ -132,6 +136,10 @@ spec:
           ports:
             - containerPort: {{ .Values.port }}
               name: solr-client
+{{- if .Values.lifecycle }}
+          lifecycle:
+{{ toYaml .Values.lifecycle | indent 12 }}
+{{- end }}
           env:
             - name: "SOLR_JAVA_MEM"
               value: "{{ .Values.javaMem }}"
@@ -143,10 +151,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
+{{- if .Values.solrCloud }}
             - name: "SOLR_HOST"
               value: "$(POD_HOSTNAME).{{ include "solr.headless-service-name" . }}"
             - name: "ZK_HOST"
               value: "{{ include "solr.zookeeper-name" . }}:2181"
+{{- end }}
             - name: "SOLR_LOG_LEVEL"
               value: "{{ .Values.logLevel }}"
 {{ if .Values.tls.enabled }}
@@ -183,7 +193,11 @@ spec:
               port: {{ .Values.port }}
           volumeMounts:
             - name: {{ include "solr.pvc-name" . }}
-              mountPath: "{{ .Values.home }}"
+              mountPath: "{{ .Values.home }}/solr.xml"
+              subPath: "solr.xml"
+            - name: {{ include "solr.pvc-name" . }}
+              mountPath: "{{ .Values.home }}/data"
+              subPath: "data"
 {{ if .Values.tls.enabled }}
             - name: "keystore-volume"
               mountPath: "/etc/ssl/keystores"
